@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import LightButton from "@/components/ui/light_button";
 
 export default function Home() {
   const subjects = ["SAT", "AP", "ACT", "Calculus", "Chemistry", "Geometry"];
@@ -15,11 +16,11 @@ export default function Home() {
   const duplicatedSubjects = [...subjects, ...subjects];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className=" bg-black text-white">
       {/* Navigation */}
-      <nav className="absolute top-0 right-0 z-10 p-4 md:p-8">
+      <nav className="absolute top-0 right-0 z-10 p-4 lg:p-8 w-full">
         {/* Hamburger menu for mobile */}
-        <button className="md:hidden text-white">
+        <button className="lg:hidden text-white">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -27,19 +28,21 @@ export default function Home() {
           </svg>
         </button>
         {/* Desktop navigation */}
-        <div className="hidden md:flex gap-8 text-base">
-          <a href="#about" className="text-white hover:text-gray-300 transition-colors">About</a>
-          <a href="#services" className="text-white hover:text-gray-300 transition-colors">Services</a>
-          <a href="#work" className="text-white hover:text-gray-300 transition-colors">Our work</a>
-          <a href="#faqs" className="text-white hover:text-gray-300 transition-colors">FAQs</a>
-          <a href="#contact" className="text-white hover:text-gray-300 transition-colors">Contact</a>
+        <div className="hidden lg:flex text-base justify-between  w-full ">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">Simon Tran</h1>
+          <div className="hidden lg:flex gap-8 text-base">
+            <a href="#services" className="text-white hover:text-gray-300 transition-colors">Services</a>
+            <a href="#testimonials" className="text-white hover:text-gray-300 transition-colors">Testimonials</a>
+            <a href="#faqs" className="text-white hover:text-gray-300 transition-colors">Schedule a Call</a>
+            <a href="#contact" className="text-white hover:text-gray-300 transition-colors">Contact</a>
+          </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <div className="relative flex flex-col md:flex-row min-h-screen">
+      <div className="relative flex flex-col lg:flex-row min-h-screen">
         {/* Background Image for Mobile - Behind Text */}
-        <div className="md:hidden absolute inset-0 bg-gray-800">
+        <div className="lg:hidden absolute inset-0 bg-gray-950">
         <Image
             src="/images/simon_portrait.png"
             alt="Simon Tran"
@@ -50,12 +53,11 @@ export default function Home() {
         </div>
 
         {/* Left Section - Text Content (2/3 width) */}
-        <div className="relative z-10 w-full md:w-2/3 flex flex-col justify-center px-6 md:px-16 py-12 md:py-32">
+        <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-end lg:justify-end px-6 lg:px-16 py-12 lg:py-32 mt-auto">
           {/* Name */}
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">Simon Tran</h1>
           
           {/* Available Badge */}
-          <div className="inline-flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 mb-6 md:mb-8 w-fit">
+          <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 mb-6 lg:mb-8 w-fit">
             <span className="text-white text-sm">• Available for work</span>
           </div>
           
@@ -70,32 +72,11 @@ export default function Home() {
           </p>
           
           {/* Contact Button */}
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 rounded-lg px-6 py-3 w-fit transition-colors"
-          >
-            <span>Contact Me</span>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-white"
-            >
-              <path
-                d="M4 12L12 4M12 4H6M12 4V10"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
+          <LightButton text="Contact Me" href="#contact" />
         </div>
 
         {/* Right Section - Image with Overlay (1/3 width) - Desktop Only */}
-        <div className="hidden md:block w-1/3 relative min-h-screen">
+        <div className="hidden lg:block w-[45%] relative min-h-screen">
           {/* Portrait Image */}
           <div className="absolute inset-0 bg-gray-800">
             <Image
@@ -108,7 +89,7 @@ export default function Home() {
           </div>
 
           {/* Testimonial Box - Bottom Right */}
-          <div className="absolute bottom-8 right-8 bg-gray-800/95 backdrop-blur-sm rounded-lg p-6 max-w-sm">
+          <div className="absolute bottom-8 right-8 bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-sm">
             {/* Stars */}
             <div className="flex gap-1 mb-3">
               {[...Array(5)].map((_, i) => (
@@ -118,7 +99,7 @@ export default function Home() {
                   height="16"
                   viewBox="0 0 16 16"
                   fill="currentColor"
-                  className="text-yellow-400"
+                  className="text-white"
                 >
                   <path d="M8 0L10.163 5.528L16 6.112L11.82 9.944L12.944 16L8 13.056L3.056 16L4.18 9.944L0 6.112L5.837 5.528L8 0Z" />
                 </svg>
@@ -406,27 +387,7 @@ export default function Home() {
             </p>
 
             {/* CTA Button */}
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg px-8 py-4 text-lg font-medium transition-colors"
-            >
-              <span>Schedule 30-min Call</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.5 15L12.5 10L7.5 5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+            <LightButton text="Schedule a Free Consultation Call" href="#contact" />
           </div>
         </div>
       </section>
@@ -633,7 +594,7 @@ export default function Home() {
                     placeholder="John Smith"
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-900"
-                  />
+                  ></input>
                 </div>
 
                 {/* Email Field */}
@@ -718,7 +679,6 @@ export default function Home() {
                   <a href="#contact" className="block text-gray-400 hover:text-white transition-colors">Contact</a>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm">Website design by JJ Gerrish</p>
             </div>
           </div>
         </div>
