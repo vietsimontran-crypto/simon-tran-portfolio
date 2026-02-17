@@ -21,7 +21,7 @@ export default function Home() {
       {/* Navigation */}
       <div className="md:container relative mx-auto ">
 
-      <nav className="absolute top-0 right-0 z-10 p-10 lg:p-8 w-full ">
+      <nav className="absolute top-0 right-0 z-10 p-6 lg:p-8 w-full ">
         {/* Hamburger menu for mobile */}
         <button className="lg:hidden text-white">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -50,27 +50,27 @@ export default function Home() {
             src="/images/simon_portrait.png"
             alt="Simon Tran"
             fill
-            className="object-cover object-left"
+            className="object-cover object-left opacity-40"
             priority
             />
         </div>
 
         {/* Left Section - Text Content (2/3 width) */}
-        <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-end lg:justify-end px-6 lg:px-16 py-12 lg:py-32 mt-auto">
+        <div className="relative z-10 w-full lg:w-[55%] flex flex-col justify-end lg:justify-end px-6 lg:px-16 py-12 lg:py-32 mt-auto max-w-2xl">
           {/* Name */}
           
           {/* Available Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 mb-6 lg:mb-8 w-fit">
-            <span className="text-white text-sm">• Available for work</span>
+          <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1 mb-3  w-fit">
+            <span className="text-white text-xs">• Available for work</span>
           </div>
           
           {/* Main Headline */}
-          <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 md:mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold lg:leading-16 mb-4 md:mb-6">
             Your trusted partner in academic mastery
           </h2>
           
           {/* Description */}
-          <p className="text-base md:text-lg text-gray-300 mb-8 md:mb-12 max-w-xl">
+          <p className="text-base md:text-lg text-gray-300 mb-8  max-w-xl">
             Personalized, concept-first mentorship that builds deep understanding, strategic thinking, and long-term academic success.
           </p>
           
@@ -93,7 +93,7 @@ export default function Home() {
               </div>
 
           {/* Testimonial Box - Bottom Right */}
-          <div className="absolute bottom-8 right-8 bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-sm hidden lg:block">
+          <div className="absolute bottom-6 right-14 bg-black/50 backdrop-blur-sm rounded-lg p-6 max-w-2xs hidden lg:block">
             {/* Stars */}
             <div className="flex gap-1 mb-3">
               {[...Array(5)].map((_, i) => (
@@ -110,7 +110,7 @@ export default function Home() {
               ))}
             </div>
             {/* Testimonial Text */}
-            <p className="text-white text-sm leading-relaxed">
+            <p className="text-white text-sm leading-snug">
               Working with Simon has been a game changer for my child's academics. The clarity and confidence he builds are unmatched.
             </p>
           </div>
