@@ -16,20 +16,23 @@ export default function Home() {
   const duplicatedSubjects = [...subjects, ...subjects];
 
   return (
-    <div className=" bg-black text-white">
+    <div className=" bg-black text-white ">
+
       {/* Navigation */}
-      <nav className="absolute top-0 right-0 z-10 p-4 lg:p-8 w-full">
+      <div className="md:container relative mx-auto ">
+
+      <nav className="absolute top-0 right-0 z-10 p-10 lg:p-8 w-full ">
         {/* Hamburger menu for mobile */}
         <button className="lg:hidden text-white">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
         {/* Desktop navigation */}
-        <div className="hidden lg:flex text-base justify-between  w-full ">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">Simon Tran</h1>
+        <div className="hidden lg:flex text-base justify-between  text-bold px-8">
+          <h1 className="text-3xl  font-bold mb-4 md:mb-6">Simon Tran</h1>
           <div className="hidden lg:flex gap-8 text-base">
             <a href="#services" className="text-white hover:text-gray-300 transition-colors">Services</a>
             <a href="#testimonials" className="text-white hover:text-gray-300 transition-colors">Testimonials</a>
@@ -40,16 +43,16 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative flex flex-col lg:flex-row min-h-screen">
+      <div className="relative flex flex-col lg:flex-row min-h-screen lg:min-h-auto">
         {/* Background Image for Mobile - Behind Text */}
-        <div className="lg:hidden absolute inset-0 bg-gray-950">
+        <div className="lg:hidden absolute inset-0 bg-gray-950" >
         <Image
             src="/images/simon_portrait.png"
             alt="Simon Tran"
             fill
-            className="object-cover object-left opacity-40"
-          priority
-        />
+            className="object-cover object-left"
+            priority
+            />
         </div>
 
         {/* Left Section - Text Content (2/3 width) */}
@@ -62,7 +65,7 @@ export default function Home() {
           </div>
           
           {/* Main Headline */}
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 md:mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 md:mb-6">
             Your trusted partner in academic mastery
           </h2>
           
@@ -76,20 +79,21 @@ export default function Home() {
         </div>
 
         {/* Right Section - Image with Overlay (1/3 width) - Desktop Only */}
-        <div className="hidden lg:block w-[45%] relative min-h-screen">
+        <div className="hidden lg:block w-[45%] relative min-h-screen lg:min-h-auto max-w-xl ">
           {/* Portrait Image */}
-          <div className="absolute inset-0 bg-gray-800">
+          <div className="absolute inset-0  ">
             <Image
               src="/images/simon_portrait.png"
               alt="Simon Tran"
               fill
-              className="object-cover object-left"
+              className="object-cover object-left p-6 rounded-4xl"
               priority
-            />
+              />
           </div>
+              </div>
 
           {/* Testimonial Box - Bottom Right */}
-          <div className="absolute bottom-8 right-8 bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-sm">
+          <div className="absolute bottom-8 right-8 bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-sm hidden lg:block">
             {/* Stars */}
             <div className="flex gap-1 mb-3">
               {[...Array(5)].map((_, i) => (
@@ -382,7 +386,7 @@ export default function Home() {
             </h2>
 
             {/* Description */}
-            <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
               Let's talk through your student's situation and determine whether this long-term mentorship makes sense.
             </p>
 
@@ -519,7 +523,7 @@ export default function Home() {
             {/* Left Column - Contact Info */}
             <div>
               {/* Badge */}
-              <div className="inline-block bg-gray-800 rounded-full px-4 py-1 mb-6">
+              <div className="inline-block bg-white/10 rounded-full px-4 py-1 mb-6">
                 <span className="text-sm text-white">Contact</span>
               </div>
 
