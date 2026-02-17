@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import {
   Accordion,
@@ -9,7 +10,15 @@ import {
 } from "@/components/ui/accordion";
 import LightButton from "@/components/ui/light_button";
 
+const navLinks = [
+  { href: "#services", label: "Services" },
+  { href: "#testimonials", label: "Testimonials" },
+  { href: "#consultation", label: "Schedule a Call" },
+  { href: "#contact", label: "Contact" },
+];
+
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const subjects = ["SAT", "AP", "ACT", "Calculus", "Chemistry", "Geometry"];
   
   // Duplicate items for seamless loop
@@ -21,9 +30,14 @@ export default function Home() {
       {/* Navigation */}
       <div className="md:container relative mx-auto ">
 
-      <nav className="absolute top-0 right-0 z-10 p-6 lg:p-8 w-full ">
+      <nav className="absolute top-0 right-0 z-20 p-6 lg:p-8 w-full ">
         {/* Hamburger menu for mobile */}
-        <button className="lg:hidden text-white">
+        <button
+          type="button"
+          className="lg:hidden text-white p-2 -mr-2"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+        >
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -33,14 +47,46 @@ export default function Home() {
         {/* Desktop navigation */}
         <div className="hidden lg:flex text-base justify-between  text-bold px-8">
           <h1 className="text-3xl  font-bold mb-4 md:mb-6">Simon Tran</h1>
-          <div className="hidden lg:flex gap-8 text-base">
-            <a href="#services" className="text-white hover:text-gray-300 transition-colors">Services</a>
-            <a href="#testimonials" className="text-white hover:text-gray-300 transition-colors">Testimonials</a>
-            <a href="#faqs" className="text-white hover:text-gray-300 transition-colors">Schedule a Call</a>
-            <a href="#contact" className="text-white hover:text-gray-300 transition-colors">Contact</a>
+          <div className="flex gap-8 text-base">
+            {navLinks.map(({ href, label }) => (
+              <a key={href} href={href} className="text-white hover:text-gray-300 transition-colors">
+                {label}
+              </a>
+            ))}
           </div>
         </div>
       </nav>
+
+      {/* Mobile: full black overlay + nav links + X to close */}
+      {menuOpen && (
+        <div className="lg:hidden fixed inset-0 z-30 bg-black flex flex-col p-6 pt-8">
+          <div className="flex justify-end">
+            <button
+              type="button"
+              className="text-white p-2 -mr-2"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <nav className="flex flex-col gap-6 flex-1 justify-center">
+            {navLinks.map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setMenuOpen(false)}
+                className="text-white hover:text-gray-300 text-xl font-medium transition-colors"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
 
       {/* Hero Section */}
       <div className="relative flex flex-col lg:flex-row min-h-screen lg:min-h-auto">
@@ -370,7 +416,7 @@ export default function Home() {
       </section>
 
       {/* Consultation Call-to-Action Section */}
-      <section className="bg-black text-white py-16 md:py-24">
+      <section id="consultation" className="bg-black text-white py-16 md:py-24">
         <div className="container mx-auto px-6 md:px-16">
           <div className="max-w-3xl mx-auto text-center">
             {/* Get Started Button */}
