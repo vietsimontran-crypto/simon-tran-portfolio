@@ -7,7 +7,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/ui/accordion"
 import LightButton from "@/components/ui/light_button";
 
 const navLinks = [
@@ -170,6 +170,10 @@ export default function Home() {
             Academic mentorship spanning advanced STEM coursework and national exams.
           </p>
           <div className="w-full max-w-4xl mx-auto relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 z-10">
+              <div className="absolute left-0 top-0 bottom-0 w-12 md:w-16 bg-linear-to-r from-white to-transparent" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 md:w-16 bg-linear-to-l from-white to-transparent" />
+            </div>
             <div className="flex animate-scroll">
               {duplicatedSubjects.map((subject, index) => (
                 <div key={`${subject}-${index}`} className="shrink-0 w-1/3 md:w-1/6 px-2 md:px-4">
@@ -189,8 +193,9 @@ export default function Home() {
         </div>
       </section>
 
+  
       {/* My Services Section */}
-      <section id="services" className="bg-white py-16 md:py-24">
+      <section id="services" className="bg-white py-16 md:py-12">
         <div className="container mx-auto px-6 md:px-16">
           {/* Section Header */}
           <div className="text-center mb-12">
@@ -205,7 +210,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Content: Image and Accordion */}
+          {/* Content: Image and Accordiofn */}
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
             {/* Left: Tutoring Image */}
             <div className="w-full md:w-1/2">
@@ -221,6 +226,7 @@ export default function Home() {
 
             {/* Right: Services Accordion */}
             <div className="w-full md:w-1/2">
+            
               <Accordion type="single" collapsible defaultValue="item-1" className="w-full">
                 <AccordionItem value="item-1">
                   <AccordionTrigger className="text-left text-lg font-semibold text-gray-900">
@@ -244,7 +250,7 @@ export default function Home() {
                     I provide long-term academic stewardship tailored to each student's needs. Rather than one-size-fits-all tutoring, my work focuses on diagnosing foundational gaps, rebuilding understanding, and guiding students through their coursework with clarity, structure, and strategic oversight.
                   </AccordionContent>
                 </AccordionItem>
-
+                
                 <AccordionItem value="item-2">
                   <AccordionTrigger className="text-left text-lg font-semibold text-gray-900">
                     <div className="flex items-center gap-3">
@@ -437,7 +443,7 @@ export default function Home() {
             </p>
 
             {/* CTA Button */}
-            <LightButton text="Schedule a Free Consultation Call" href="#contact" />
+            <LightButton text="Schedule a Free Consultation Call" href="https://calendly.com/vietsimon-tran/30min" />
           </div>
         </div>
       </section>
@@ -643,8 +649,10 @@ export default function Home() {
                     name="name"
                     placeholder="John Smith"
                     required
+                    autoComplete="name"
+                    suppressHydrationWarning
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-900"
-                  ></input>
+                  />
                 </div>
 
                 {/* Email Field */}
@@ -658,6 +666,8 @@ export default function Home() {
                     name="email"
                     placeholder="johnsmith@gmail.com"
                     required
+                    autoComplete="email"
+                    suppressHydrationWarning
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-900"
                   />
                 </div>
@@ -672,6 +682,8 @@ export default function Home() {
                     id="phone"
                     name="phone"
                     placeholder="+44789 123456"
+                    autoComplete="tel"
+                    suppressHydrationWarning
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-900"
                   />
                 </div>
@@ -687,6 +699,7 @@ export default function Home() {
                     rows={5}
                     placeholder="Hello, I'd like to enquire about...."
                     required
+                    suppressHydrationWarning
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-900 resize-none"
                   />
                 </div>
