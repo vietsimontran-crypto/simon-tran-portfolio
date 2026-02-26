@@ -296,7 +296,7 @@ export default function Home() {
 
   
       {/* My Services Section */}
-      <section id="services" className="bg-white py-16 md:py-12">
+      <section id="services" className="bg-white py-8 md:py-2">
         <motion.div
           className="container mx-auto px-6 md:px-16"
           initial="hidden"
