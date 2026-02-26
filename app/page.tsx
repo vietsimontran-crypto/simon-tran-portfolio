@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   Accordion,
@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import LightButton from "@/components/ui/light_button";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -47,6 +47,13 @@ export default function Home() {
     },
   };
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
     <div className=" bg-black text-white ">
 
@@ -81,35 +88,63 @@ export default function Home() {
       </nav>
 
       {/* Mobile: full black overlay + nav links + X to close */}
-      {menuOpen && (
-        <div className="lg:hidden fixed inset-0 z-30 bg-black flex flex-col p-6 pt-8">
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="text-white p-2 -mr-2"
-              onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="lg:hidden fixed inset-0 z-30 bg-black/95 backdrop-blur-sm flex flex-col p-6 pt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.28 }}
+          >
+            <motion.div
+              className="flex justify-end"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.24 }}
             >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
-          <nav className="flex flex-col gap-6 flex-1 justify-center">
-            {navLinks.map(({ href, label }) => (
-              <a
-                key={href}
-                href={href}
+              <button
+                type="button"
+                className="text-white p-2 -mr-2"
                 onClick={() => setMenuOpen(false)}
-                className="text-white hover:text-gray-300 text-xl font-medium transition-colors"
+                aria-label="Close menu"
               >
-                {label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </motion.div>
+            <motion.nav
+              className="flex flex-col gap-6 flex-1 justify-center"
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                show: { opacity: 1, y: 0, transition: { staggerChildren: 0.08, delayChildren: 0.08 } },
+              }}
+            >
+              {navLinks.map(({ href, label }) => (
+                <motion.a
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-white hover:text-gray-300 text-xl font-medium transition-colors"
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {label}
+                </motion.a>
+              ))}
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <motion.div
