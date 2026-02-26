@@ -156,7 +156,17 @@ export default function Home() {
       >
         {/* Background Image for Mobile - Behind Text */}
         <div className="lg:hidden absolute inset-0 bg-gray-950" >
-          <motion.div variants={itemVariants}>
+        <motion.div
+          className=" "
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            delay: 0,
+            ease: "linear",
+            duration: 10,
+            type: "spring",
+          }}
+        >
 
         <Image
             src="/images/simon_portrait.png"
