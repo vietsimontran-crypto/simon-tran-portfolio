@@ -148,7 +148,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <motion.div
-        className="relative flex flex-col lg:flex-row min-h-screen lg:min-h-auto"
+        className="relative flex flex-col lg:flex-row min-h-[90vh] lg:min-h-auto"
         initial="hidden"
         whileInView="show"
         viewport={viewport}
@@ -209,7 +209,7 @@ export default function Home() {
         </div>
 
         {/* Right Section - Image with Overlay (1/3 width) - Desktop Only */}
-        <div className="hidden lg:block w-[45%] relative min-h-screen lg:min-h-auto max-w-xl ">
+        <div className="hidden lg:block w-[45%] relative min-h-[90vh] lg:min-h-auto max-w-xl ">
           {/* Portrait Image */}
           <motion.div
           className=" "
