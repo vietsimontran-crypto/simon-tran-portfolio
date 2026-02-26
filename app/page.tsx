@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import LightButton from "@/components/ui/light_button";
+import { motion } from "framer-motion";
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -23,6 +24,28 @@ export default function Home() {
   
   // Duplicate items for seamless loop
   const duplicatedSubjects = [...subjects, ...subjects];
+  const viewport = { once: true, amount: 0.2 };
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        staggerChildren: 0.14,
+      },
+    },
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
 
   return (
     <div className=" bg-black text-white ">
@@ -89,9 +112,17 @@ export default function Home() {
       )}
 
       {/* Hero Section */}
-      <div className="relative flex flex-col lg:flex-row min-h-screen lg:min-h-auto">
+      <motion.div
+        className="relative flex flex-col lg:flex-row min-h-screen lg:min-h-auto"
+        initial="hidden"
+        whileInView="show"
+        viewport={viewport}
+        variants={sectionVariants}
+      >
         {/* Background Image for Mobile - Behind Text */}
         <div className="lg:hidden absolute inset-0 bg-gray-950" >
+          <motion.div variants={itemVariants}>
+
         <Image
             src="/images/simon_portrait.png"
             alt="Simon Tran"
@@ -99,6 +130,7 @@ export default function Home() {
             className="object-cover object-left opacity-40"
             priority
             />
+            </motion.div>
         </div>
 
         {/* Left Section - Text Content (2/3 width) */}
@@ -111,22 +143,41 @@ export default function Home() {
           </div>
           
           {/* Main Headline */}
+          <motion.div variants={itemVariants}>
+
           <h2 className="text-3xl md:text-5xl font-bold lg:leading-16 mb-4 md:mb-6">
             Your trusted partner in academic mastery
           </h2>
+        </motion.div>
           
           {/* Description */}
+          <motion.div variants={itemVariants}>
+
           <p className="text-base md:text-lg text-gray-300 mb-8  max-w-xl">
             Personalized, concept-first mentorship that builds deep understanding, strategic thinking, and long-term academic success.
           </p>
-          
+        </motion.div>
+        <motion.div variants={itemVariants}>          
           {/* Contact Button */}
           <LightButton text="Contact Me" href="#contact" />
+          </motion.div>
         </div>
 
         {/* Right Section - Image with Overlay (1/3 width) - Desktop Only */}
         <div className="hidden lg:block w-[45%] relative min-h-screen lg:min-h-auto max-w-xl ">
           {/* Portrait Image */}
+          <motion.div
+          className=" "
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            delay: 0,
+            ease: "linear",
+            duration: 8,
+            type: "spring",
+          }}
+        >
+
           <div className="absolute inset-0  ">
             <Image
               src="/images/simon_portrait.png"
@@ -136,8 +187,9 @@ export default function Home() {
               priority
               />
           </div>
+              </motion.div>
               </div>
-
+          
           {/* Testimonial Box - Bottom Right */}
           <div className="absolute bottom-6 right-14 bg-black/50 backdrop-blur-sm rounded-lg p-6 max-w-2xs hidden lg:block">
             {/* Stars */}
@@ -156,15 +208,18 @@ export default function Home() {
               ))}
             </div>
             {/* Testimonial Text */}
+              <motion.div variants={itemVariants}>
             <p className="text-white text-sm leading-snug">
               Working with Simon has been a game changer for my child's academics. The clarity and confidence he builds are unmatched.
             </p>
+        </motion.div>
           </div>
-        </div>
+      </motion.div>
       </div>
 
       {/* Subject Logos Carousel Section */}
       <section className="bg-white py-8 md:py-12">
+        <motion.div initial="hidden" whileInView="show" viewport={viewport} variants={sectionVariants}>
         <div className="container mx-auto px-6 md:px-16">
           <p className="text-center text-gray-600 mb-6 text-sm md:text-base">
             Academic mentorship spanning advanced STEM coursework and national exams.
@@ -191,14 +246,21 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </motion.div>
       </section>
 
   
       {/* My Services Section */}
       <section id="services" className="bg-white py-16 md:py-12">
-        <div className="container mx-auto px-6 md:px-16">
+        <motion.div
+          className="container mx-auto px-6 md:px-16"
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          variants={sectionVariants}
+        >
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <motion.div className="text-center mb-12" variants={itemVariants}>
             <div className="inline-block bg-gray-200 rounded-full px-4 py-1 mb-4">
               <span className="text-sm text-gray-700">Services</span>
             </div>
@@ -208,12 +270,12 @@ export default function Home() {
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Find out which one of our services fit the needs of your project.
             </p>
-          </div>
+          </motion.div>
 
           {/* Content: Image and Accordiofn */}
-          <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
+          <motion.div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start" variants={itemVariants}>
             {/* Left: Tutoring Image */}
-            <div className="w-full md:w-1/2">
+            <motion.div className="w-full md:w-1/2" variants={itemVariants}>
               <div className="relative aspect-4/3 rounded-lg overflow-hidden">
                 <Image
                   src="/images/simon_tutoring.png"
@@ -222,10 +284,10 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
 
             {/* Right: Services Accordion */}
-            <div className="w-full md:w-1/2">
+            <motion.div className="w-full md:w-1/2" variants={itemVariants}>
             
               <Accordion type="single" collapsible defaultValue="item-1" className="w-full">
                 <AccordionItem value="item-1">
@@ -365,17 +427,23 @@ export default function Home() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Stats/Metrics Section */}
       <section className="bg-white py-16 md:py-24">
-        <div className="container mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+        <motion.div
+          className="container mx-auto px-6 md:px-16"
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          variants={sectionVariants}
+        >
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12" variants={sectionVariants}>
             {/* Stat 1 */}
-            <div className="text-center md:text-left">
+            <motion.div className="text-center md:text-left" variants={itemVariants}>
               <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">7+</div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
                 Years of mentorship experience
@@ -383,10 +451,10 @@ export default function Home() {
               <p className="text-gray-600">
                 Improving homes with expert craftsmanship for years.
               </p>
-            </div>
+            </motion.div>
 
             {/* Stat 2 */}
-            <div className="text-center md:text-left">
+            <motion.div className="text-center md:text-left" variants={itemVariants}>
               <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">200</div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
                 Point SAT Score Improvement
@@ -394,10 +462,10 @@ export default function Home() {
               <p className="text-gray-600">
                 Achieved through structured, long-term preparation.
               </p>
-            </div>
+            </motion.div>
 
             {/* Stat 3 */}
-            <div className="text-center md:text-left">
+            <motion.div className="text-center md:text-left" variants={itemVariants}>
               <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">48</div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
                 Average Response Time Window
@@ -405,10 +473,10 @@ export default function Home() {
               <p className="text-gray-600">
                 For reliable and quick parent and student communication.
               </p>
-            </div>
+            </motion.div>
 
             {/* Stat 4 */}
-            <div className="text-center md:text-left">
+            <motion.div className="text-center md:text-left" variants={itemVariants}>
               <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">20%</div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
                 Students Maintain or Improve Grades
@@ -416,43 +484,57 @@ export default function Home() {
               <p className="text-gray-600">
                 Across core STEM coursework and advanced classes.
               </p>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Consultation Call-to-Action Section */}
       <section id="consultation" className="bg-black text-white py-16 md:py-24">
-        <div className="container mx-auto px-6 md:px-16">
-          <div className="max-w-3xl mx-auto text-center">
+        <motion.div
+          className="container mx-auto px-6 md:px-16"
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          variants={sectionVariants}
+        >
+          <motion.div className="max-w-3xl mx-auto text-center" variants={sectionVariants}>
             {/* Get Started Button */}
-            <div className="mb-8">
+            <motion.div className="mb-8" variants={itemVariants}>
               <button className="bg-gray-200 text-gray-900 rounded-full px-6 py-2 text-sm font-medium hover:bg-gray-300 transition-colors">
                 Get Started
               </button>
-            </div>
+            </motion.div>
 
             {/* Main Headline */}
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <motion.h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" variants={itemVariants}>
               Schedule a Free Consultation Call
-            </h2>
+            </motion.h2>
 
             {/* Description */}
-          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+          <motion.p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto" variants={itemVariants}>
               Let's talk through your student's situation and determine whether this long-term mentorship makes sense.
-            </p>
+            </motion.p>
 
             {/* CTA Button */}
-            <LightButton text="Schedule a Free Consultation Call" href="https://calendly.com/vietsimon-tran/30min" />
-          </div>
-        </div>
+            <motion.div variants={itemVariants}>
+              <LightButton text="Schedule a Free Consultation Call" href="https://calendly.com/vietsimon-tran/30min" />
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Testimonials Section */}
       <section id="testimonials" className="bg-white py-16 md:py-24">
-        <div className="container mx-auto px-6 md:px-16">
+        <motion.div
+          className="container mx-auto px-6 md:px-16"
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          variants={sectionVariants}
+        >
           {/* Header */}
-          <div className="text-center mb-12">
+          <motion.div className="text-center mb-12" variants={itemVariants}>
             <div className="inline-block bg-gray-200 rounded-full px-4 py-1 mb-4">
               <span className="text-sm text-gray-700">Testimonials</span>
             </div>
@@ -462,10 +544,10 @@ export default function Home() {
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Hear from our happy clients about their experience working with Refit and the quality of our craftsmanship.
             </p>
-          </div>
+          </motion.div>
 
           {/* Animated Testimonial Rows */}
-          <div className="space-y-8 overflow-hidden">
+          <motion.div className="space-y-8 overflow-hidden" variants={itemVariants}>
             {/* Row 1 - Scrolls Left */}
             <div className="flex animate-scroll-left gap-6">
               {[
@@ -489,7 +571,14 @@ export default function Home() {
                   <p className="text-gray-900 mb-4 font-medium">{testimonial.quote}</p>
                   {/* Client Info */}
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gray-300"></div>
+                    <img
+                      src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(`${testimonial.client}-${index}-row1`)}`}
+                      alt={testimonial.client}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-200"
+                    />
                     <span className="text-sm text-gray-600">{testimonial.client}</span>
                   </div>
                 </div>
@@ -510,7 +599,14 @@ export default function Home() {
                   </div>
                   <p className="text-gray-900 mb-4 font-medium">{testimonial.quote}</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gray-300"></div>
+                    <img
+                      src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(`${testimonial.client}-${index}-row1-dup`)}`}
+                      alt={testimonial.client}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-200"
+                    />
                     <span className="text-sm text-gray-600">{testimonial.client}</span>
                   </div>
                 </div>
@@ -537,7 +633,14 @@ export default function Home() {
                   </div>
                   <p className="text-gray-900 mb-4 font-medium">{testimonial.quote}</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gray-300"></div>
+                    <img
+                      src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(`${testimonial.client}-${index}-row2`)}`}
+                      alt={testimonial.client}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-200"
+                    />
                     <span className="text-sm text-gray-600">{testimonial.client}</span>
                   </div>
                 </div>
@@ -558,22 +661,35 @@ export default function Home() {
                   </div>
                   <p className="text-gray-900 mb-4 font-medium">{testimonial.quote}</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gray-300"></div>
+                    <img
+                      src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(`${testimonial.client}-${index}-row2-dup`)}`}
+                      alt={testimonial.client}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-200"
+                    />
                     <span className="text-sm text-gray-600">{testimonial.client}</span>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Contact Section */}
       <section id="contact" className="bg-black text-white py-16 md:py-24">
-        <div className="container mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
+        <motion.div
+          className="container mx-auto px-6 md:px-16"
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          variants={sectionVariants}
+        >
+          <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16" variants={sectionVariants}>
             {/* Left Column - Contact Info */}
-            <div>
+            <motion.div variants={itemVariants}>
               {/* Badge */}
               <div className="inline-block bg-white/10 rounded-full px-4 py-1 mb-6">
                 <span className="text-sm text-white">Contact</span>
@@ -633,10 +749,10 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Column - Contact Form */}
-            <div>
+            <motion.div variants={itemVariants}>
               <form className="bg-white rounded-lg p-6 md:p-8 space-y-6">
                 {/* Name Field */}
                 <div>
@@ -712,23 +828,29 @@ export default function Home() {
                   Send message
                 </button>
               </form>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Footer Section */}
       <footer className="bg-black text-white py-12 md:py-16 border-t border-gray-800">
-        <div className="container mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <motion.div
+          className="container mx-auto px-6 md:px-16"
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          variants={sectionVariants}
+        >
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12" variants={sectionVariants}>
             {/* Left Side */}
-            <div>
+            <motion.div variants={itemVariants}>
               <h3 className="text-3xl md:text-4xl font-bold mb-4">Simon</h3>
               <p className="text-gray-400 text-sm">©2025 Refit. All rights reserved.</p>
-            </div>
+            </motion.div>
 
             {/* Right Side */}
-            <div className="md:text-right">
+            <motion.div className="md:text-right" variants={itemVariants}>
               <h4 className="text-lg font-semibold mb-4">Quick links</h4>
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="space-y-2">
@@ -742,9 +864,9 @@ export default function Home() {
                   <a href="#contact" className="block text-gray-400 hover:text-white transition-colors">Contact</a>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </footer>
     </div>
   );
